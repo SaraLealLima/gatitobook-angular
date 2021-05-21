@@ -1,0 +1,35 @@
+<h4 class="text-center mt-5">Registre-se e mostre seu pet ao mundo!</h4>
+
+<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+
+  <div class="form-group m-3">
+    <input placeholder="E-mail" class="form-control" formControlName="email" />
+    <app-mensagem *ngIf="novoUsuarioForm.get('email')?.errors?.required && novoUsuarioForm.get('email')?.touched" mensagem="E-mail obrigatório"></app-mensagem>
+    <app-mensagem *ngIf="novoUsuarioForm.get('email')?.errors?.email && novoUsuarioForm.get('email')?.touched" mensagem="E-mail no formato incorreto"></app-mensagem>
+  </div>
+
+  <div class="form-group m-3">
+    <input placeholder="Nome Completo" class="form-control" formControlName="fullName" />
+    <app-mensagem *ngIf="novoUsuarioForm.get('fullName')?.errors?.required && novoUsuarioForm.get('fullName')?.touched" mensagem="Nome obrigatório"></app-mensagem>
+  </div>
+
+  <div class="form-group m-3">
+    <input placeholder="Usuário" class="form-control" formControlName="userName" />
+    <app-mensagem *ngIf="novoUsuarioForm.get('userName')?.errors?.minusculo && novoUsuarioForm.get('userName')?.touched" mensagem="Nome de usuário deve apenas conter letras minúsculas"></app-mensagem>
+    <app-mensagem *ngIf="novoUsuarioForm.get('userName')?.errors?.usuarioExistente && novoUsuarioForm.get('userName')?.touched" mensagem="Este nome de usuário já existe"></app-mensagem>
+  </div>
+
+  <div class="form-group m-3">
+    <input placeholder="Senha" class="form-control" formControlName="password" type="password"/>
+    <app-mensagem *ngIf="novoUsuarioForm.get('password')?.errors?.required && novoUsuarioForm.get('password')?.touched" mensagem="Senha obrigatória"></app-mensagem>
+    <app-mensagem *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario" mensagem="A senha não pode ser igual o nome de usuário"></app-mensagem>
+
+  </div>
+
+  <div class="d-grid gap-2">
+    <button class="btn btn-info btn-block mx-3">Cadastre-se</button>
+  </div>
+
+</form>
+
+<p class="mx-3 mt-1"> Já é um usuário? <a [routerLink]="['']"> Faça o login</a> </p>
